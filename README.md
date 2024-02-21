@@ -1,3 +1,32 @@
+# Project Gift List
+
+The objective of this project is to implement the feature of checking a given person's name is in the list of nice persons,
+making use of Merkle tree and extending the server/client and utils prototype code provided by Alchemy University.
+
+In the setting of this project, the client is the prover and the server is the verifier.
+The client has a list of nice persons, and hence is capable of generating a proof that the Merkle tree of the list of nice persons indeed contains an arbitrary nice person.
+On the other hand, the server knows the root of the Merkle tree of the nice person's list and how to verify the proof, but nothing more about the content of the list of nice persons.
+
+The client sends to the server the following two data
+- a name of a person who is willing to get a gift
+- a proof that this person is in the Merkle tree of the nice persons.
+and in case the server verified the proof, the gift is sent back.
+
+# About the implementation
+
+## client/index.js
+
+- L6 Creating a Merkle tree for the list of nice persons.
+- In the main function, it takes a command line argument, which is a person's name, and then at L16, it generates a proof that the person is in the list of nice persons.
+- L17 Posting the request to the server to check the proof.
+
+## server/index.js
+- L9 The Merkle root is hard coded.  It is only the information about the nice person's list the server knows.
+- L14 Verifying the proof sent from the client.
+- L15 Cheking the result of verification, then it gives a gift (at L16) in case the successful verification, or otherwise a message saying the person is not in the list (at L19).
+
+The rest of this README is the original README provided by Alchemy University.
+
 # Gift List
 
 To get started with the repository, clone it and then run `npm install` in the top-level directory to install the depedencies.
